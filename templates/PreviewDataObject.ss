@@ -4,7 +4,7 @@
     <% base_tag %>
   </head>
   <body>
-    <div class="content content-typography-space">
+    <div class="content fw-typography-spacing content-typography-space">
 
       <% if $Rendered %>
         $Rendered
