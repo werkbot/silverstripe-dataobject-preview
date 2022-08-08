@@ -16,6 +16,9 @@
     <% if $ID %>
         <script>
             var element = document.querySelector("[data-id='$ID']");
+            element.style.boxShadow = "0 0 0 99999px rgb(0 0 0 / 60%)";
+            element.style.position = "relative";
+            element.style.zIndex = "9999";
             element.scrollIntoView();
         </script>
     <% end_if %>
