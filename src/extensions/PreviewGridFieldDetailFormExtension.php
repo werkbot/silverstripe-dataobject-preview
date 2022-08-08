@@ -11,23 +11,6 @@ use SilverStripe\View\Requirements;
 
 class PreviewGridFieldDetailFormExtension extends Extension
 {
-    public function updateItemEditForm(&$form)
-    {
-        $fields = $form->Fields();
-        if ($this->owner->record instanceof CMSPreviewable && !$fields->fieldByName('SilverStripeNavigator')) {
-            $this->injectNavigatorAndPreview($form, $fields);
-
-            // Added Edit/Preview/Split mode on CMS side
-            $formActions = $form->Actions();
-            $html = $this->owner->customise([
-                "SelectID" => "preview-mode-dropdown-in-content"
-            ])->renderWith(array('SilverStripe\\Admin\\LeftAndMain_ViewModeSelector'));
-            $PreviewLink = LiteralField::create('', $html);
-            $formActions->push($PreviewLink);
-            $form->setActions($formActions);
-        }
-    }
-
     private function injectNavigatorAndPreview(&$form, &$fields)
     {
         Requirements::javascript('arillo/silverstripe-dataobject-preview:client/javascript/GridField.Preview.js');

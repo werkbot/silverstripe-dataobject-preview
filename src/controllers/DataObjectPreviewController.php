@@ -1,4 +1,5 @@
 <?php
+
 namespace SilverStripe\DataObjectPreview\Controllers;
 
 use PageController;
@@ -10,7 +11,7 @@ class DataObjectPreviewController extends PageController
 {
     protected $dataobject;
 
-    private static $allowed_actions = [ 'show' ];
+    private static $allowed_actions = ['show'];
     private static $url_segment = 'show';
 
     private static $url_handlers = [
@@ -42,7 +43,7 @@ class DataObjectPreviewController extends PageController
     {
         $class = urldecode($request->param('ClassName'));
         $class = str_replace('-', '\\', $class);
-        if (!class_exists($class)){
+        if (!class_exists($class)) {
             throw new InvalidArgumentException(sprintf(
                 'DataObjectPreviewController: Class of type %s doesn\'t exist',
                 $class
@@ -50,16 +51,14 @@ class DataObjectPreviewController extends PageController
         }
 
         $id = $request->param('ID');
-        if (!ctype_digit($id))
-        {
+        if (!ctype_digit($id)) {
             throw new InvalidArgumentException('DataObjectPreviewController: ID needs to be an integer');
         }
 
         $this->dataobject = $class::get()->filter(array('ID' => $id))->First();
 
         $r = false;
-        switch (true)
-        {
+        switch (true) {
             case (!$this->dataobject):
                 $r = false;
                 break;
@@ -76,7 +75,8 @@ class DataObjectPreviewController extends PageController
         }
 
         return $this->customise([
+            'ID' => $id,
             'Rendered' => $r
-        ])->renderWith('PreviewDataObject');
+        ])->renderWith(['PreviewDataObject']);
     }
 }
