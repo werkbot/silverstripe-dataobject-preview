@@ -16,7 +16,9 @@
         "expose": ["client"]
     },
     "require": {
-        "silverstripe/framework": "^4"
+        "php": "^8.1",
+        "silverstripe/cms": "^5",
+        "silverstripe/framework": "^5"
     },
     "support": {
         "issues":
